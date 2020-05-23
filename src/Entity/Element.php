@@ -2,22 +2,40 @@
 
 namespace App\Entity;
 
+use App\Repository\ElementRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ElementRepisotory")
+ * @ORM\Entity(repositoryClass=ElementRepository::class)
  */
 class Element
 {
     /**
-     * @ORM\Name()
+     * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getName(): ?string
     {
         return $this->name;
-    } 
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
 }

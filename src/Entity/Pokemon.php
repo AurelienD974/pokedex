@@ -2,42 +2,57 @@
 
 namespace App\Entity;
 
+use App\Repository\PokemonRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\PokemonRepisotory")
+ * @ORM\Entity(repositoryClass=PokemonRepository::class)
  */
 class Pokemon
 {
     /**
-     * @ORM\Name()
+     * @ORM\Id()
      * @ORM\GeneratedValue()
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @ORM\Column(type="string", length=100)
      */
     private $name;
-      /**
-     * @ORM\Photo()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="string")
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $url_photo; 
-      /**
-     * @ORM\Element()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="string")
-     */
-    private $element;
+    private $url_photo;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getName(): ?string
     {
         return $this->name;
     }
-    public function getPhoto(): ?string
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getUrlPhoto(): ?string
     {
         return $this->url_photo;
     }
-    public function getElement(): ?string
+
+    public function setUrlPhoto(?string $url_photo): self
     {
-        return $this->element;
+        $this->url_photo = $url_photo;
+
+        return $this;
     }
 }
